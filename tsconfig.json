@@ -23,10 +23,6 @@
       "@containers/*": ["containers/*"],
       "@other-support/*": ["other-support/*"],
       "@redux-folder/*": ["redux-folder/*"],
-      "@apollo-client-folder/*": ["apollo-client-folder/*"],
-      "@date-fns-folder/*": ["date-fns-folder/*"],
-      "@styles/*": ["styles/*"],
-      "@icon-components/*": ["icon-components/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
