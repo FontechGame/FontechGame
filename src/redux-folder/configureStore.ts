@@ -37,7 +37,9 @@ const configureStore = (): StringKeyObject => {
     presistedReducer,
     applyMiddleware(thunk)
   )
+  let persistor = persistStore(store)
   return {
+    persistor,
     store,
   }
 }

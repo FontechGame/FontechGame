@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import AppContent from '@containers/AppContent'
 import configureStore from '@redux-folder/configureStore'
 
-const { store } = configureStore()
+const { store, persistor } = configureStore()
 
 function MyApp({
   Component,
@@ -15,13 +15,18 @@ function MyApp({
 }: AppProps) {
   return (
     <Provider store={store}>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-      />
-      <AppContent>
-        <Component {...pageProps} />
-      </AppContent>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+      >
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+        <AppContent>
+          <Component {...pageProps} />
+        </AppContent>
+      </PersistGate>
     </Provider>
   )
 }
