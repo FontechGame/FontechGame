@@ -1,8 +1,11 @@
-import type { NextPage } from 'next'
-import 'tailwindcss/tailwind.css'
+import React from 'react'
 
-const Home: NextPage = () => {
-  return <div>Fontech Game Home</div>
+const Home: React.FC = () => {
+  return (
+    <div className="p-4 text-white">
+      Fontech Game Home
+    </div>
+  )
 }
 
 export default Home

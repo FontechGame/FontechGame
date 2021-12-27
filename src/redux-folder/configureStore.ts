@@ -8,6 +8,13 @@ import {
 
 import thunk from 'redux-thunk'
 
+import {
+  persistStore,
+  persistReducer,
+} from 'redux-persist'
+
+import storage from 'redux-persist/lib/storage'
+
 import localDataManagerState from '@redux-folder/reducers/localDataManagerState'
 
 const rootReducer = combineReducers({
@@ -15,8 +22,19 @@ const rootReducer = combineReducers({
 })
 
 const configureStore = (): StringKeyObject => {
+  const persistConfig = {
+    key: 'fontech-game-reducer',
+    storage: storage,
+    blacklist: [],
+  }
+
+  const presistedReducer = persistReducer(
+    persistConfig,
+    rootReducer
+  )
+
   const store = createStore(
-    rootReducer,
+    presistedReducer,
     applyMiddleware(thunk)
   )
   return {
