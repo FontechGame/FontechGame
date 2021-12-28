@@ -10,6 +10,7 @@ import { unionArray } from '@other-support/Consts'
 
 const initTetrisManagerState: TetrisManagerType =
   {
+    isLose: false,
     count: 800,
     reminderBlockIndexes: Array<number>(),
     currentBlockIndexes: Array<number>(),
@@ -23,6 +24,11 @@ const tetrisManagerState = (
     TetrisManagerActionTypes,
     TetrisManagerType
   >({
+    [TRETRIS_STRING.UPDATE_ISLOSE]:
+      eachAction => ({
+        ...state,
+        isLose: eachAction.isLose,
+      }),
     [TRETRIS_STRING.UPDATE_CURRENT]:
       eachAction => ({
         ...state,

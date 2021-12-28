@@ -1,10 +1,12 @@
 export type TetrisManagerType = {
+  isLose: boolean
   count: number
   reminderBlockIndexes: number[]
   currentBlockIndexes: number[]
 }
 
 export enum TRETRIS_STRING {
+  UPDATE_ISLOSE = 'UPDATE_ISLOSE',
   UPDATE_REMINDER = 'UPDATE_REMINDER',
   UPDATE_CURRENT = 'UPDATE_CURRENT',
   CLEAR = 'CLEAR',
@@ -12,6 +14,12 @@ export enum TRETRIS_STRING {
 
 interface TetrisManagerBaseActionType {
   type: TRETRIS_STRING
+}
+
+interface TetrisManagerUpdateIsLoseActionType
+  extends TetrisManagerBaseActionType {
+  type: TRETRIS_STRING.UPDATE_ISLOSE
+  isLose: boolean
 }
 
 interface TetrisManagerUpdateReminderActionType
@@ -32,6 +40,7 @@ interface TetrisManagerClearActionType
 }
 
 export type TetrisManagerActionTypes =
+  | TetrisManagerUpdateIsLoseActionType
   | TetrisManagerUpdateReminderActionType
   | TetrisManagerUpdateCurrentActionType
   | TetrisManagerClearActionType

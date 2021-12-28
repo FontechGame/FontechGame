@@ -4,6 +4,14 @@ import {
   TetrisManagerType,
 } from '@redux-folder/types/tetrisManagerType'
 
+export const updateIsLose = (
+  isLose: boolean
+): TetrisManagerActionTypes =>
+  <TetrisManagerActionTypes>{
+    type: TRETRIS_STRING.UPDATE_ISLOSE,
+    isLose,
+  }
+
 export const updateCurrentBlock = (
   currentBlockIndexes: number[]
 ): TetrisManagerActionTypes =>

@@ -4,32 +4,23 @@ import BlockContainer from '@components/BlockContainer'
 
 import useTetris from '@redux-folder/hooks/useTetris'
 
-const defaultBlocks: Array<number[]> = [
-  [101, 102, 103, 104],
-  [102, 121, 122, 123],
-  [101, 121, 122, 123],
-  [101, 102, 121, 122],
-  [101, 102, 122, 123],
-]
-
 const ReduxTetrisBlock: React.FC = () => {
   const {
+    isLose,
+    count,
+    activeBlockIndexes,
     currentBlockIndexes,
     doUpdateCurrentBlock,
     doUpdateReminderBlock,
-    doclearTetris,
-    count,
-    activeBlockIndexes,
     dropDownCurrentBlock,
+    doClearTetris,
+    doUpdateCurrentBlockByRandom,
   } = useTetris()
 
   React.useEffect(() => {
-    doclearTetris()
+    // doClearTetris()
 
-    const block = defaultBlocks.pop()
-    if (block) {
-      doUpdateCurrentBlock([...block])
-    }
+    doUpdateCurrentBlockByRandom()
   }, [])
 
   React.useEffect(() => {
@@ -43,10 +34,7 @@ const ReduxTetrisBlock: React.FC = () => {
     if (!dropDownActiveBlockIndexesResult) {
       doUpdateReminderBlock(currentBlockIndexes)
 
-      const block = defaultBlocks.pop()
-      if (block) {
-        doUpdateCurrentBlock([...block])
-      }
+      doUpdateCurrentBlockByRandom()
       return
     }
 

@@ -6,18 +6,6 @@ import type {
   ButtonHTMLAttributes,
 } from 'react'
 
-// interface CustomButtonProps
-//   extends ButtonHTMLAttributes<HTMLButtonElement> {
-//   // className?: string | string[]
-// }
-
-// const CustomButton: React.FC<
-//   CustomButtonProps &
-//     DetailedHTMLProps<
-//       ButtonHTMLAttributes<HTMLButtonElement>,
-//       HTMLButtonElement
-//     >
-// > = ({ children, className, ...props }) => {
 const CustomButton: React.FC<
   DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
