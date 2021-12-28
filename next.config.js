@@ -12,7 +12,8 @@ module.exports = {
   ) {
     return {
       "/": { page: "/" },
-      "/tetris": { page: "/tetris" }
+      "/tetris": { page: "/tetris" },
+      "/snake": { page: "/snake" },
     };
   }
 }

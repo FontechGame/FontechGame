@@ -1,39 +1,14 @@
 import React from 'react'
 
-import useLocalData from '@redux-folder/hooks/useLocalData'
-import CustomButton from '@components/CustomButton'
+import TetrisBlock from '@components/TetrisBlock'
 
 const Tetris: React.FC = () => {
-  const {
-    doSaveLocalData,
-    doClearLocalData,
-    data,
-  } = useLocalData()
-
   return (
     <div className="p-4">
-      <div className="flex flex-col w-[280px]">
+      <div className="flex flex-col w-[300px]">
         <div className="text-white">Tetris</div>
-        <div className="text-white">
-          data: {data}
-        </div>
-        <CustomButton
-          className="mb-2"
-          onClick={() =>
-            doSaveLocalData({
-              data: {
-                info: 'data',
-              },
-            })
-          }
-        >
-          setData
-        </CustomButton>
-        <CustomButton
-          onClick={() => doClearLocalData()}
-        >
-          Clear
-        </CustomButton>
+
+        <TetrisBlock />
       </div>
     </div>
   )
