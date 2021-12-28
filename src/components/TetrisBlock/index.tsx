@@ -5,15 +5,16 @@ import BlockContainer from '@components/BlockContainer'
 const TetrisBlock: React.FC = () => {
   return (
     <div className="pt-[64px]">
-      <div className="flex border-x border-b border-[cyan] mt-4">
+      <div className="relative flex mt-4">
+        <div className="absolute inset top-[64px] bottom-0 left-0 right-0 border-x border-b border-[cyan]" />
         <BlockContainer
-          count={800}
+          count={840}
           activeBlockIndexes={[
-            ...[1, 2, 3, 4],
-            ...[42, 61, 62, 63],
-            ...[101, 121, 122, 123],
-            ...[161, 162, 181, 182],
-            ...[221, 222, 242, 243],
+            ...[101, 102, 103, 104],
+            ...[142, 161, 162, 163],
+            ...[201, 221, 222, 223],
+            ...[261, 262, 281, 282],
+            ...[321, 322, 342, 343],
           ]}
         />
       </div>
