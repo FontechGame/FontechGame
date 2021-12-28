@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST={__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},"/":["static/chunks/pages/index-4e17398419f79ea3.js"],"/_error":["static/chunks/pages/_error-2280fa386d040b66.js"],"/tetris":["static/chunks/pages/tetris-a9846eb28d2b662c.js"],sortedPages:["/","/_app","/_error","/tetris"]},self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();
