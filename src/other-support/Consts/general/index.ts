@@ -89,6 +89,20 @@ export const returnIntId = (
   return parseInt(id[0])
 }
 
+export const unionArray = <T>({
+  currentArray,
+  targetArray,
+}: {
+  currentArray: T[]
+  targetArray: T[]
+}): T[] =>
+  Array.from(
+    new Set<T>([
+      ...currentArray,
+      ...targetArray,
+    ]).values()
+  )
+
 export const fakeRandomImage = ({
   id = 1,
   width = 200,

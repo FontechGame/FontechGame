@@ -1,10 +1,12 @@
 export type TetrisManagerType = {
   count: number
-  activeBlockIndexes: number[]
+  reminderBlockIndexes: number[]
+  currentBlockIndexes: number[]
 }
 
 export enum TRETRIS_STRING {
-  UPDATE_ACTIVEBLOCKS = 'UPDATE_ACTIVEBLOCKS',
+  UPDATE_REMINDER = 'UPDATE_REMINDER',
+  UPDATE_CURRENT = 'UPDATE_CURRENT',
   CLEAR = 'CLEAR',
 }
 
@@ -12,10 +14,16 @@ interface TetrisManagerBaseActionType {
   type: TRETRIS_STRING
 }
 
-interface TetrisManagerUpdateActionType
+interface TetrisManagerUpdateReminderActionType
   extends TetrisManagerBaseActionType {
-  type: TRETRIS_STRING.UPDATE_ACTIVEBLOCKS
-  activeBlockIndexes: number[]
+  type: TRETRIS_STRING.UPDATE_REMINDER
+  reminderBlockIndexes: number[]
+}
+
+interface TetrisManagerUpdateCurrentActionType
+  extends TetrisManagerBaseActionType {
+  type: TRETRIS_STRING.UPDATE_CURRENT
+  currentBlockIndexes: number[]
 }
 
 interface TetrisManagerClearActionType
@@ -24,5 +32,6 @@ interface TetrisManagerClearActionType
 }
 
 export type TetrisManagerActionTypes =
-  | TetrisManagerUpdateActionType
+  | TetrisManagerUpdateReminderActionType
+  | TetrisManagerUpdateCurrentActionType
   | TetrisManagerClearActionType

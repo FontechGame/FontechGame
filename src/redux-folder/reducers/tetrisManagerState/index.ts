@@ -6,10 +6,13 @@ import {
 
 import { switchCaseTState } from '@other-support/Consts'
 
+import { unionArray } from '@other-support/Consts'
+
 const initTetrisManagerState: TetrisManagerType =
   {
     count: 800,
-    activeBlockIndexes: Array<number>(),
+    reminderBlockIndexes: Array<number>(),
+    currentBlockIndexes: Array<number>(),
   }
 
 const tetrisManagerState = (
@@ -20,11 +23,21 @@ const tetrisManagerState = (
     TetrisManagerActionTypes,
     TetrisManagerType
   >({
-    [TRETRIS_STRING.UPDATE_ACTIVEBLOCKS]:
+    [TRETRIS_STRING.UPDATE_CURRENT]:
       eachAction => ({
         ...state,
-        activeBlockIndexes:
-          eachAction.activeBlockIndexes,
+        currentBlockIndexes:
+          eachAction.currentBlockIndexes,
+      }),
+    [TRETRIS_STRING.UPDATE_REMINDER]:
+      eachAction => ({
+        ...state,
+        reminderBlockIndexes: unionArray({
+          currentArray:
+            state.reminderBlockIndexes,
+          targetArray:
+            eachAction.reminderBlockIndexes,
+        }),
       }),
     [TRETRIS_STRING.CLEAR]: () =>
       initTetrisManagerState,

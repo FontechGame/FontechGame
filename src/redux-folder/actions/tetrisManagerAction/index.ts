@@ -4,12 +4,20 @@ import {
   TetrisManagerType,
 } from '@redux-folder/types/tetrisManagerType'
 
-export const updateActiveBlockIndexes = (
-  activeBlockIndexes: number[]
+export const updateCurrentBlock = (
+  currentBlockIndexes: number[]
 ): TetrisManagerActionTypes =>
   <TetrisManagerActionTypes>{
-    type: TRETRIS_STRING.UPDATE_ACTIVEBLOCKS,
-    activeBlockIndexes,
+    type: TRETRIS_STRING.UPDATE_CURRENT,
+    currentBlockIndexes,
+  }
+
+export const updateReminderBlock = (
+  reminderBlockIndexes: number[]
+): TetrisManagerActionTypes =>
+  <TetrisManagerActionTypes>{
+    type: TRETRIS_STRING.UPDATE_REMINDER,
+    reminderBlockIndexes,
   }
 
 export const clearTetris =

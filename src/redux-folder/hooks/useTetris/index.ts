@@ -1,7 +1,5 @@
 import React from 'react'
 
-import type { Dispatch } from 'redux'
-
 import {
   useSelector,
   shallowEqual,
@@ -11,29 +9,55 @@ import {
 import { TetrisManagerActionTypes } from '@redux-folder/types/tetrisManagerType'
 
 import {
-  updateActiveBlockIndexes,
+  updateCurrentBlock,
+  updateReminderBlock,
   clearTetris,
 } from '@redux-folder/actions/tetrisManagerAction'
+
+import { unionArray } from '@other-support/Consts'
 
 export const useTetris = () => {
   const dispatch = useDispatch()
 
-  const { count, activeBlockIndexes } =
-    useSelector(
-      state => ({
-        count: state.tetrisManagerState.count,
-        activeBlockIndexes:
-          state.tetrisManagerState
-            .activeBlockIndexes,
-      }),
-      shallowEqual
-    )
+  const {
+    count,
+    reminderBlockIndexes,
+    currentBlockIndexes,
+  } = useSelector(
+    state => ({
+      count: state.tetrisManagerState.count,
+      reminderBlockIndexes:
+        state.tetrisManagerState
+          .reminderBlockIndexes,
+      currentBlockIndexes:
+        state.tetrisManagerState
+          .currentBlockIndexes,
+    }),
+    shallowEqual
+  )
 
-  const doUpdateActiveBlockIndexes = (
-    activeBlockIndexes: number[]
+  const activeBlockIndexes = React.useMemo(
+    () =>
+      unionArray({
+        currentArray: reminderBlockIndexes,
+        targetArray: currentBlockIndexes,
+      }),
+    [reminderBlockIndexes, currentBlockIndexes]
+  )
+
+  const doUpdateCurrentBlock = (
+    currentBlockIndexes: number[]
   ) => {
     dispatch(
-      updateActiveBlockIndexes(activeBlockIndexes)
+      updateCurrentBlock(currentBlockIndexes)
+    )
+  }
+
+  const doUpdateReminderBlock = (
+    reminderBlockIndexes: number[]
+  ) => {
+    dispatch(
+      updateReminderBlock(reminderBlockIndexes)
     )
   }
 
@@ -41,27 +65,43 @@ export const useTetris = () => {
     dispatch(clearTetris())
   }
 
-  const dropDownActiveBlockIndexes =
+  const dropDownCurrentBlock =
     React.useCallback(() => {
       if (
-        activeBlockIndexes.find(
+        currentBlockIndexes.find(
           each => each + 20 >= count
         )
       ) {
         return
       }
 
-      return activeBlockIndexes.map(
+      if (
+        currentBlockIndexes.find(each =>
+          reminderBlockIndexes.find(
+            reminder => each + 20 == reminder
+          )
+        )
+      ) {
+        return
+      }
+
+      return currentBlockIndexes.map(
         each => each + 20
       )
-    }, [activeBlockIndexes, count])
+    }, [
+      currentBlockIndexes,
+      reminderBlockIndexes,
+      count,
+    ])
 
   return {
-    doUpdateActiveBlockIndexes,
+    currentBlockIndexes,
+    doUpdateCurrentBlock,
+    doUpdateReminderBlock,
     doclearTetris,
     count,
     activeBlockIndexes,
-    dropDownActiveBlockIndexes,
+    dropDownCurrentBlock,
   }
 }
 

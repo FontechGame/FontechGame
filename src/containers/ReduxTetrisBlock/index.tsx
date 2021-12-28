@@ -4,24 +4,32 @@ import BlockContainer from '@components/BlockContainer'
 
 import useTetris from '@redux-folder/hooks/useTetris'
 
+const defaultBlocks: Array<number[]> = [
+  [101, 102, 103, 104],
+  [102, 121, 122, 123],
+  [101, 121, 122, 123],
+  [101, 102, 121, 122],
+  [101, 102, 122, 123],
+]
+
 const ReduxTetrisBlock: React.FC = () => {
   const {
-    doUpdateActiveBlockIndexes,
+    currentBlockIndexes,
+    doUpdateCurrentBlock,
+    doUpdateReminderBlock,
     doclearTetris,
     count,
     activeBlockIndexes,
-    dropDownActiveBlockIndexes,
+    dropDownCurrentBlock,
   } = useTetris()
 
   React.useEffect(() => {
     doclearTetris()
-    doUpdateActiveBlockIndexes([
-      ...[101, 102, 103, 104],
-      ...[202, 221, 222, 223],
-      ...[321, 341, 342, 343],
-      ...[441, 442, 461, 462],
-      ...[561, 562, 582, 583],
-    ])
+
+    const block = defaultBlocks.pop()
+    if (block) {
+      doUpdateCurrentBlock([...block])
+    }
   }, [])
 
   React.useEffect(() => {
@@ -30,24 +38,32 @@ const ReduxTetrisBlock: React.FC = () => {
     }
 
     const dropDownActiveBlockIndexesResult =
-      dropDownActiveBlockIndexes()
+      dropDownCurrentBlock()
 
     if (!dropDownActiveBlockIndexesResult) {
+      doUpdateReminderBlock(currentBlockIndexes)
+
+      const block = defaultBlocks.pop()
+      if (block) {
+        doUpdateCurrentBlock([...block])
+      }
       return
     }
 
     setTimeout(
       () =>
-        doUpdateActiveBlockIndexes(
+        doUpdateCurrentBlock(
           dropDownActiveBlockIndexesResult
         ),
-      1000
+      10
     )
   }, [
     count,
+    currentBlockIndexes,
     activeBlockIndexes,
-    doUpdateActiveBlockIndexes,
-    dropDownActiveBlockIndexes,
+    doUpdateCurrentBlock,
+    doUpdateReminderBlock,
+    dropDownCurrentBlock,
   ])
 
   return (
