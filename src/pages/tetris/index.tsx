@@ -1,6 +1,7 @@
 import React from 'react'
 
 import TetrisBlock from '@components/TetrisBlock'
+import ReduxTetrisBlock from '@containers/ReduxTetrisBlock'
 
 const Tetris: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const Tetris: React.FC = () => {
       <div className="flex flex-col w-[300px]">
         <div className="text-white">Tetris</div>
 
-        <TetrisBlock />
+        <ReduxTetrisBlock />
       </div>
     </div>
   )

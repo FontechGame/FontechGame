@@ -8,7 +8,7 @@ const TetrisBlock: React.FC = () => {
       <div className="relative flex mt-4">
         <div className="absolute inset top-[64px] bottom-0 left-0 right-0 border-x border-b border-[cyan]" />
         <BlockContainer
-          count={840}
+          count={800}
           activeBlockIndexes={[
             ...[101, 102, 103, 104],
             ...[142, 161, 162, 163],

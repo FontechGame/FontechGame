@@ -16,8 +16,10 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import localDataManagerState from '@redux-folder/reducers/localDataManagerState'
+import tetrisManagerState from '@redux-folder/reducers/tetrisManagerState'
 
 const rootReducer = combineReducers({
+  tetrisManagerState,
   localDataManagerState,
 })
 
@@ -25,7 +27,10 @@ const configureStore = (): StringKeyObject => {
   const persistConfig = {
     key: 'fontech-game-reducer',
     storage: storage,
-    blacklist: [],
+    blacklist: [
+      'tetrisManagerState',
+      'localDataManagerState',
+    ],
   }
 
   const presistedReducer = persistReducer(
