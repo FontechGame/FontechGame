@@ -10,16 +10,17 @@ const ReduxTetrisBlock: React.FC = () => {
     doclearTetris,
     count,
     activeBlockIndexes,
+    dropDownActiveBlockIndexes,
   } = useTetris()
 
   React.useEffect(() => {
     doclearTetris()
     doUpdateActiveBlockIndexes([
       ...[101, 102, 103, 104],
-      ...[142, 161, 162, 163],
-      ...[201, 221, 222, 223],
-      ...[261, 262, 281, 282],
-      ...[321, 322, 342, 343],
+      ...[202, 221, 222, 223],
+      ...[321, 341, 342, 343],
+      ...[441, 442, 461, 462],
+      ...[561, 562, 582, 583],
     ])
   }, [])
 
@@ -28,20 +29,17 @@ const ReduxTetrisBlock: React.FC = () => {
       return
     }
 
-    if (
-      activeBlockIndexes.find(
-        each => each + 20 >= count
-      )
-    ) {
+    const dropDownActiveBlockIndexesResult =
+      dropDownActiveBlockIndexes()
+
+    if (!dropDownActiveBlockIndexesResult) {
       return
     }
 
     setTimeout(
       () =>
         doUpdateActiveBlockIndexes(
-          activeBlockIndexes.map(
-            each => each + 20
-          )
+          dropDownActiveBlockIndexesResult
         ),
       1000
     )
@@ -49,6 +47,7 @@ const ReduxTetrisBlock: React.FC = () => {
     count,
     activeBlockIndexes,
     doUpdateActiveBlockIndexes,
+    dropDownActiveBlockIndexes,
   ])
 
   return (

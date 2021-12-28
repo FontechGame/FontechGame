@@ -41,11 +41,27 @@ export const useTetris = () => {
     dispatch(clearTetris())
   }
 
+  const dropDownActiveBlockIndexes =
+    React.useCallback(() => {
+      if (
+        activeBlockIndexes.find(
+          each => each + 20 >= count
+        )
+      ) {
+        return
+      }
+
+      return activeBlockIndexes.map(
+        each => each + 20
+      )
+    }, [activeBlockIndexes, count])
+
   return {
     doUpdateActiveBlockIndexes,
     doclearTetris,
     count,
     activeBlockIndexes,
+    dropDownActiveBlockIndexes,
   }
 }
 
