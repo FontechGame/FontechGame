@@ -21,15 +21,9 @@ const ReduxTetrisBlock: React.FC = () => {
       ...[261, 262, 281, 282],
       ...[321, 322, 342, 343],
     ])
-  }, [doUpdateActiveBlockIndexes, doclearTetris])
+  }, [])
 
   React.useEffect(() => {
-    // console.log(
-    //   'max: ',
-    //   Math.max(...activeBlockIndexes)
-    // )
-    // console.log('count: ', count)
-
     if (activeBlockIndexes.length === 0) {
       return
     }
