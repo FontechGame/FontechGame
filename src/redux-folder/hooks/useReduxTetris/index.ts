@@ -1,7 +1,7 @@
 import React from 'react'
 
-import useReduxTetrisAction from '@redux-folder/hooks/useReduxTetris/useReduxTetrisAction'
-import useReduxTetrisState from '@redux-folder/hooks/useReduxTetris/useReduxTetrisState'
+import useReduxTetrisAction from '@redux-folder/hooks/useReduxTetrisAction'
+import useReduxTetrisState from '@redux-folder/hooks/useReduxTetrisState'
 
 import { unionArray } from '@other-support/Consts'
 import { defaultBlocks } from '@other-support/Data'
@@ -47,13 +47,13 @@ export const useReduxTetris = () => {
     }
 
   const initTetris = async () => {
-    await doAsyncUpdateIsLose(true)
+    await doAsyncUpdateIsLose(false)
     await doAsyncClearTetris()
   }
 
   const doAsyncUpdateReminderBlockCheckingIsLost =
-    () => {
-      doAsyncUpdateReminderBlock(
+    async () => {
+      await doAsyncUpdateReminderBlock(
         currentBlockIndexes
       )
 
@@ -62,11 +62,12 @@ export const useReduxTetris = () => {
           each => each < 80
         )
       ) {
-        doAsyncUpdateIsLose(false)
+        // console.log('set Lose')
+        await doAsyncUpdateIsLose(true)
         return
       }
 
-      doAsyncUpdateCurrentBlockByRandom()
+      await doAsyncUpdateCurrentBlockByRandom()
     }
 
   const dropdownCurrentBlock = () => {
@@ -81,7 +82,7 @@ export const useReduxTetris = () => {
     if (
       reminderBlockIndexes.find(each => each < 80)
     ) {
-      doAsyncUpdateIsLose(false)
+      doAsyncUpdateIsLose(true)
       return
     }
 

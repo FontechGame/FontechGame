@@ -3,8 +3,11 @@ import classnames from 'classnames'
 import BlockContainer from '@components/BlockContainer'
 
 import useReduxTetris from '@redux-folder/hooks/useReduxTetris'
+import useReduxTetrisState from '@redux-folder/hooks/useReduxTetrisState'
 
 const ReduxTetrisBlock: React.FC = () => {
+  // const {  } = useReduxTetrisState()
+
   const {
     isLose,
     count,
@@ -14,8 +17,6 @@ const ReduxTetrisBlock: React.FC = () => {
     doAsyncUpdateCurrentBlockByRandom,
   } = useReduxTetris()
 
-  // console.log('ReduxTetrisBlock isLose:', isLose)
-
   React.useEffect(() => {
     doAsyncUpdateCurrentBlockByRandom()
   }, [])
@@ -23,6 +24,14 @@ const ReduxTetrisBlock: React.FC = () => {
   React.useEffect(() => {
     dropdownCurrentBlock()
   }, [dropdownCurrentBlock])
+
+  // if (isLose) {
+  //   return (
+  //     <div className="p-4">
+  //       <div>You Lose</div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="pt-[64px]">

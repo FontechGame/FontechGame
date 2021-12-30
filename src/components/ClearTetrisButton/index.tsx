@@ -7,18 +7,19 @@ const ClearTetrisButton: React.FC = () => {
   const {
     isLose,
     initTetris,
+    doAsyncUpdateIsLose,
     doAsyncUpdateCurrentBlockByRandom,
   } = useReduxTetris()
 
-  // console.log('ClearTetrisButton isLose:', isLose)
   if (!isLose) {
     return <div>AAA</div>
   }
 
   const clearTetrisButtonOnClick = async () => {
     await initTetris()
+    await doAsyncUpdateIsLose(false)
 
-    // doAsyncUpdateCurrentBlockByRandom
+    await doAsyncUpdateCurrentBlockByRandom()
   }
 
   return (
