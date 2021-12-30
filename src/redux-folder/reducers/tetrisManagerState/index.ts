@@ -45,8 +45,13 @@ const tetrisManagerState = (
             eachAction.reminderBlockIndexes,
         }),
       }),
-    [TRETRIS_STRING.CLEAR]: () =>
-      initTetrisManagerState,
+    [TRETRIS_STRING.CLEAR]: () => {
+      console.log(
+        'initTetrisManagerState: ',
+        initTetrisManagerState
+      )
+      return initTetrisManagerState
+    },
   })(() => state)(action.type)
 
   return reducer(action)

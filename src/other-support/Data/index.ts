@@ -1,3 +1,15 @@
-import { emptyStringKeyObject } from '@other-support/Consts'
+// export const defaultBlocks: Array<number[]> = [
+//   [101, 102, 103, 104],
+//   [102, 121, 122, 123],
+//   [101, 121, 122, 123],
+//   [101, 102, 121, 122],
+//   [101, 102, 122, 123],
+// ]
 
-export default emptyStringKeyObject
+export const defaultBlocks: Array<number[]> = [
+  [1, 2, 3, 4],
+  [2, 21, 22, 23],
+  [1, 21, 22, 23],
+  [1, 2, 21, 22],
+  [1, 2, 22, 23],
+]

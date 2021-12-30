@@ -1,22 +1,24 @@
 import React from 'react'
 import CustomButton from '@components/CustomButton'
 
-import useTetris from '@redux-folder/hooks/useTetris'
+import useReduxTetris from '@redux-folder/hooks/useReduxTetris'
 
 const ClearTetrisButton: React.FC = () => {
   const {
     isLose,
-    doClearTetris,
-    doUpdateCurrentBlockByRandom,
-  } = useTetris()
+    initTetris,
+    doAsyncUpdateCurrentBlockByRandom,
+  } = useReduxTetris()
 
+  // console.log('ClearTetrisButton isLose:', isLose)
   if (!isLose) {
     return <div>AAA</div>
   }
 
-  const clearTetrisButtonOnClick = () => {
-    doClearTetris()
-    doUpdateCurrentBlockByRandom()
+  const clearTetrisButtonOnClick = async () => {
+    await initTetris()
+
+    // doAsyncUpdateCurrentBlockByRandom
   }
 
   return (

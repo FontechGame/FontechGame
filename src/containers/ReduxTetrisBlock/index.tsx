@@ -2,57 +2,27 @@ import React from 'react'
 import classnames from 'classnames'
 import BlockContainer from '@components/BlockContainer'
 
-import useTetris from '@redux-folder/hooks/useTetris'
+import useReduxTetris from '@redux-folder/hooks/useReduxTetris'
 
 const ReduxTetrisBlock: React.FC = () => {
   const {
     isLose,
     count,
     activeBlockIndexes,
-    currentBlockIndexes,
-    doUpdateCurrentBlock,
-    doUpdateReminderBlock,
-    dropDownCurrentBlock,
-    doClearTetris,
-    doUpdateCurrentBlockByRandom,
-  } = useTetris()
+
+    dropdownCurrentBlock,
+    doAsyncUpdateCurrentBlockByRandom,
+  } = useReduxTetris()
+
+  // console.log('ReduxTetrisBlock isLose:', isLose)
 
   React.useEffect(() => {
-    // doClearTetris()
-
-    doUpdateCurrentBlockByRandom()
+    doAsyncUpdateCurrentBlockByRandom()
   }, [])
 
   React.useEffect(() => {
-    if (activeBlockIndexes.length === 0) {
-      return
-    }
-
-    const dropDownActiveBlockIndexesResult =
-      dropDownCurrentBlock()
-
-    if (!dropDownActiveBlockIndexesResult) {
-      doUpdateReminderBlock(currentBlockIndexes)
-
-      doUpdateCurrentBlockByRandom()
-      return
-    }
-
-    setTimeout(
-      () =>
-        doUpdateCurrentBlock(
-          dropDownActiveBlockIndexesResult
-        ),
-      10
-    )
-  }, [
-    count,
-    currentBlockIndexes,
-    activeBlockIndexes,
-    doUpdateCurrentBlock,
-    doUpdateReminderBlock,
-    dropDownCurrentBlock,
-  ])
+    dropdownCurrentBlock()
+  }, [dropdownCurrentBlock])
 
   return (
     <div className="pt-[64px]">
