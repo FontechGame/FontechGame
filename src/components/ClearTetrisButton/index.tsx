@@ -1,7 +1,7 @@
 import React from 'react'
 import CustomButton from '@components/CustomButton'
 
-import useReduxTetris from '@redux-folder/hooks/useReduxTetris'
+import useReduxTetrisForClearTetrisButton from '@other-support/Hooks/useReduxTetrisForClearTetrisButton'
 
 const ClearTetrisButton: React.FC = () => {
   const {
@@ -9,7 +9,7 @@ const ClearTetrisButton: React.FC = () => {
     initTetris,
     doAsyncUpdateIsLose,
     doAsyncUpdateCurrentBlockByRandom,
-  } = useReduxTetris()
+  } = useReduxTetrisForClearTetrisButton()
 
   if (!isLose) {
     return <div>AAA</div>
@@ -18,7 +18,6 @@ const ClearTetrisButton: React.FC = () => {
   const clearTetrisButtonOnClick = async () => {
     await initTetris()
     await doAsyncUpdateIsLose(false)
-
     await doAsyncUpdateCurrentBlockByRandom()
   }
 

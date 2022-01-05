@@ -3,32 +3,29 @@ import React from 'react'
 import useReduxTetrisAction from '@redux-folder/hooks/useReduxTetrisAction'
 import useReduxTetrisState from '@redux-folder/hooks/useReduxTetrisState'
 
-import { unionArray } from '@other-support/Consts'
 import { defaultBlocks } from '@other-support/Data'
 
-export const useReduxTetris = () => {
+export const useCustomReduxTetrisAction = () => {
   const {
     isLose,
     count,
     reminderBlockIndexes,
     currentBlockIndexes,
+    activeBlockIndexes,
   } = useReduxTetrisState()
 
   const {
     doAsyncUpdateIsLose,
     doAsyncUpdateCurrentBlock,
     doAsyncUpdateReminderBlock,
+    doAsyncReminderDeleteLines,
     doAsyncClearTetris,
   } = useReduxTetrisAction()
 
-  const activeBlockIndexes = React.useMemo(
-    () =>
-      unionArray({
-        currentArray: reminderBlockIndexes,
-        targetArray: currentBlockIndexes,
-      }),
-    [reminderBlockIndexes, currentBlockIndexes]
-  )
+  const initTetris = async () => {
+    await doAsyncUpdateIsLose(false)
+    await doAsyncClearTetris()
+  }
 
   const doAsyncUpdateCurrentBlockByRandom =
     async () => {
@@ -46,11 +43,6 @@ export const useReduxTetris = () => {
       }
     }
 
-  const initTetris = async () => {
-    await doAsyncUpdateIsLose(false)
-    await doAsyncClearTetris()
-  }
-
   const doAsyncUpdateReminderBlockCheckingIsLost =
     async () => {
       await doAsyncUpdateReminderBlock(
@@ -67,10 +59,11 @@ export const useReduxTetris = () => {
         return
       }
 
+      await doAsyncReminderDeleteLines()
       await doAsyncUpdateCurrentBlockByRandom()
     }
 
-  const dropdownCurrentBlock = () => {
+  const dropDownCurrentBlock = () => {
     if (isLose) {
       return
     }
@@ -112,23 +105,83 @@ export const useReduxTetris = () => {
     )
   }
 
+  const updateCurrentBlockWithKeyCode = (
+    keyCode: string
+  ) => {
+    if (isLose) {
+      return
+    }
+
+    if (keyCode == 'ArrowDown') {
+      console.log('do ArrowDown')
+      return
+    }
+
+    if (keyCode == 'ArrowUp') {
+      console.log('do ArrowDown')
+      return
+    }
+
+    if (keyCode == 'ArrowRight') {
+      if (
+        currentBlockIndexes.find(
+          each => (each + 1) % 20 == 1
+        )
+      ) {
+        return
+      }
+
+      if (
+        currentBlockIndexes.find(each =>
+          reminderBlockIndexes.find(
+            eachReminder =>
+              each + 1 == eachReminder
+          )
+        )
+      ) {
+        return
+      }
+
+      doAsyncUpdateCurrentBlock(
+        currentBlockIndexes.map(each => each + 1)
+      )
+      return
+    }
+
+    if (keyCode == 'ArrowLeft') {
+      if (
+        currentBlockIndexes.find(
+          each => (each - 1) % 20 == 0
+        )
+      ) {
+        return
+      }
+
+      if (
+        currentBlockIndexes.find(each =>
+          reminderBlockIndexes.find(
+            eachReminder =>
+              each - 1 == eachReminder
+          )
+        )
+      ) {
+        return
+      }
+
+      doAsyncUpdateCurrentBlock(
+        currentBlockIndexes.map(each => each - 1)
+      )
+
+      return
+    }
+  }
+
   return {
-    isLose,
-    count,
-    reminderBlockIndexes,
-    currentBlockIndexes,
-    activeBlockIndexes,
-
-    doAsyncUpdateIsLose,
-    doAsyncUpdateCurrentBlock,
-    doAsyncUpdateReminderBlock,
-    doAsyncClearTetris,
-
-    doAsyncUpdateCurrentBlockByRandom,
     initTetris,
-
-    dropdownCurrentBlock,
+    doAsyncUpdateCurrentBlockByRandom,
+    dropDownCurrentBlock,
+    updateCurrentBlockWithKeyCode,
   }
 }
 
-export default useReduxTetris
+export default useCustomReduxTetrisAction

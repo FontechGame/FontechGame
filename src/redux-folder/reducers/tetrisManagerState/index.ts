@@ -6,7 +6,10 @@ import {
 
 import { switchCaseTState } from '@other-support/Consts'
 
-import { unionArray } from '@other-support/Consts'
+import {
+  unionArray,
+  returnDeletedLinesReminderBlockIndexes,
+} from '@other-support/Consts'
 
 const initTetrisManagerState: TetrisManagerType =
   {
@@ -45,11 +48,16 @@ const tetrisManagerState = (
             eachAction.reminderBlockIndexes,
         }),
       }),
+    [TRETRIS_STRING.REMINDER_DELETE_LINES]:
+      eachAction => ({
+        ...state,
+        reminderBlockIndexes:
+          returnDeletedLinesReminderBlockIndexes({
+            reminderBlockIndexes:
+              state.reminderBlockIndexes,
+          }),
+      }),
     [TRETRIS_STRING.CLEAR]: () => {
-      console.log(
-        'initTetrisManagerState: ',
-        initTetrisManagerState
-      )
       return initTetrisManagerState
     },
   })(() => state)(action.type)

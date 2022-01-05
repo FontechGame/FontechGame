@@ -6,6 +6,7 @@ import {
   updateIsLose,
   updateCurrentBlock,
   updateReminderBlock,
+  reminderDeleteLines,
   clearTetris,
 } from '@redux-folder/actions/tetrisManagerAction'
 
@@ -34,6 +35,10 @@ export const useReduxTetrisAction = () => {
     )
   }
 
+  const doAsyncReminderDeleteLines = async () => {
+    await dispatch(reminderDeleteLines())
+  }
+
   const doAsyncClearTetris = async () => {
     await dispatch(clearTetris())
   }
@@ -41,6 +46,7 @@ export const useReduxTetrisAction = () => {
   return {
     doAsyncUpdateIsLose,
     doAsyncUpdateCurrentBlock,
+    doAsyncReminderDeleteLines,
     doAsyncUpdateReminderBlock,
     doAsyncClearTetris,
   }

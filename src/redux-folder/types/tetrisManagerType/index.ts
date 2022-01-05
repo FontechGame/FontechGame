@@ -8,6 +8,7 @@ export type TetrisManagerType = {
 export enum TRETRIS_STRING {
   UPDATE_ISLOSE = 'UPDATE_ISLOSE',
   UPDATE_REMINDER = 'UPDATE_REMINDER',
+  REMINDER_DELETE_LINES = 'REMINDER_DELETE_LINES',
   UPDATE_CURRENT = 'UPDATE_CURRENT',
   CLEAR = 'CLEAR',
 }
@@ -28,6 +29,11 @@ interface TetrisManagerUpdateReminderActionType
   reminderBlockIndexes: number[]
 }
 
+interface TetrisManagerReminderDeleteLinesActionType
+  extends TetrisManagerBaseActionType {
+  type: TRETRIS_STRING.REMINDER_DELETE_LINES
+}
+
 interface TetrisManagerUpdateCurrentActionType
   extends TetrisManagerBaseActionType {
   type: TRETRIS_STRING.UPDATE_CURRENT
@@ -42,5 +48,6 @@ interface TetrisManagerClearActionType
 export type TetrisManagerActionTypes =
   | TetrisManagerUpdateIsLoseActionType
   | TetrisManagerUpdateReminderActionType
+  | TetrisManagerReminderDeleteLinesActionType
   | TetrisManagerUpdateCurrentActionType
   | TetrisManagerClearActionType

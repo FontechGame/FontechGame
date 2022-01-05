@@ -28,6 +28,12 @@ export const updateReminderBlock = (
     reminderBlockIndexes,
   }
 
+export const reminderDeleteLines =
+  (): TetrisManagerActionTypes =>
+    <TetrisManagerActionTypes>{
+      type: TRETRIS_STRING.REMINDER_DELETE_LINES,
+    }
+
 export const clearTetris =
   (): TetrisManagerActionTypes =>
     <TetrisManagerActionTypes>{

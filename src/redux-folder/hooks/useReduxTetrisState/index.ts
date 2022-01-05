@@ -6,6 +6,8 @@ import {
   shallowEqual,
 } from 'react-redux'
 
+import { unionArray } from '@other-support/Consts'
+
 export const useReduxTetrisState = () => {
   const {
     isLose,
@@ -26,11 +28,21 @@ export const useReduxTetrisState = () => {
     shallowEqual
   )
 
+  const activeBlockIndexes = React.useMemo(
+    () =>
+      unionArray({
+        currentArray: reminderBlockIndexes,
+        targetArray: currentBlockIndexes,
+      }),
+    [reminderBlockIndexes, currentBlockIndexes]
+  )
+
   return {
     isLose,
     count,
     reminderBlockIndexes,
     currentBlockIndexes,
+    activeBlockIndexes,
   }
 }
 
