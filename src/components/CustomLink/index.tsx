@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import Link from 'next/link'
 
 interface CustomLinkProps {
-  className: undefined | string | string[]
+  className?: string | string[]
   title: string
   path: string
 }
@@ -14,7 +14,14 @@ const CustomLink: React.FC<CustomLinkProps> = ({
   path,
 }) => {
   return (
-    <div className={classnames(className, 'p-2')}>
+    <div
+      className={classnames(
+        className,
+        'text-blue-800',
+        'hover:underline',
+        'p-2'
+      )}
+    >
       <Link href={path}>
         <a>{title}</a>
       </Link>
