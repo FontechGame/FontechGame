@@ -1,9 +1,11 @@
 module.exports = {
   "extends": [
     "next/core-web-vitals",
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "tailwindcss"
   ],
   "rules": {
     "prettier/prettier": "error",

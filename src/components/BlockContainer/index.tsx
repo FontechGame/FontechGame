@@ -38,7 +38,6 @@ const BlockContainer: React.FC<
           <div
             key={`${blockKey}-${index + 1}`}
             className={classnames(
-              `${blockKey}-${index + 1}`,
               'w-[14px]',
               'h-[14px]',
               blockClassName

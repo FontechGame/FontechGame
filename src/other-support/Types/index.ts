@@ -27,9 +27,14 @@ export type ReactNodeCasses<
 }
 
 export type StringKeyObject = { [k: string]: any }
-export type StringKeyBooleanValueObject = {
-  [k: string]: boolean
+export type StringKeyObjectType<T> = {
+  [k: string]: T
 }
+export type StringKeyBooleanValueObject =
+  StringKeyObjectType<boolean>
+
+export type StringKeyStringValueObject =
+  StringKeyObjectType<string>
 
 export type FixedSizeArray<
   N extends number,

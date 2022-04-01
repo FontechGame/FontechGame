@@ -113,3 +113,13 @@ export const fakeRandomImage = ({
   height: number
 }): string =>
   `https://picsum.photos/${width}/${height}?random=${id}`
+
+export const showAlert = (
+  alertText: string = 'error'
+): void =>
+  alert(JSON.stringify(alertText, null, 2))
+
+export const getRandomOneFromArray = <T>(
+  array: Array<T>
+): T =>
+  array[Math.floor(Math.random() * array.length)]
