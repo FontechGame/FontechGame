@@ -33,6 +33,10 @@ const useDrawLots = () => {
 
   const [drawLotResults, setDrawLotResults] =
     React.useState<StringKeyStringValueObject>({})
+  const [
+    realDrawLotResults,
+    setRealDrawLotResults,
+  ] = React.useState<Array<string>>([])
 
   const insertDrawLot = React.useCallback(
     (value: string) => {
@@ -116,7 +120,11 @@ const useDrawLots = () => {
 
     removeDrawLot(random)
     showAlert(random)
-  }, [drawLots])
+    setRealDrawLotResults([
+      ...realDrawLotResults,
+      random,
+    ])
+  }, [drawLots, realDrawLotResults])
 
   const drawLot = React.useCallback(() => {
     if (drawLots.length === 0) {
@@ -150,6 +158,7 @@ const useDrawLots = () => {
     clearDraw,
 
     drawLotResults,
+    realDrawLotResults,
   }
 }
 

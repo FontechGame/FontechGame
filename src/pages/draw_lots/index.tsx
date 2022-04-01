@@ -12,6 +12,7 @@ const DrawLots: React.FC = () => {
     insertToDrawLot,
 
     realDrawLot,
+    realDrawLotResults,
   } = useDrawLots()
 
   return (
@@ -41,6 +42,17 @@ const DrawLots: React.FC = () => {
       >
         Do Draw!!
       </CustomButton>
+
+      <div>
+        {realDrawLotResults.map(each => (
+          <div
+            className="m-2 !text-gray-700 !bg-white"
+            key={`draw-lots-${each}`}
+          >
+            {each}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
