@@ -9,8 +9,8 @@ const Home: React.FC = () => {
         Fontech Game Home
       </div>
       <CustomLink
-        title="To Tetris"
-        path="/tetris"
+        title="To Vote Lots"
+        path="/draw_lots"
       />
     </div>
   )

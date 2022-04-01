@@ -14,6 +14,8 @@ module.exports = {
       "/": { page: "/" },
       "/tetris": { page: "/tetris" },
       "/snake": { page: "/snake" },
+      "/test": { page: "/test" },
+      "/draw_lots": { page: "/draw_lots" },
     };
   }
 }
